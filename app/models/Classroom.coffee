@@ -127,7 +127,7 @@ module.exports = class Classroom extends CocoModel
     playtime = 0
     levels = []
     for level, index in courseLevels.models
-      levelsTotal++ unless level.get('practice')
+      levelsTotal++ unless level.get('practice') or level.get('assessment')
       complete = false
       if session = levelSessionMap[level.get('original')]
         complete = session.get('state').complete ? false
@@ -138,10 +138,11 @@ module.exports = class Classroom extends CocoModel
           currentIndex = index
         else
           lastStarted = level
-          levelsLeft++ unless level.get('practice')
-      else if not level.get('practice')
+          levelsLeft++ unless level.get('practice') or level.get('assessment')
+      else if not (level.get('practice') or level.get('assessment'))
         levelsLeft++
       levels.push
+        assessment: level.get('assessment') ? false
         practice: level.get('practice') ? false
         complete: complete
     lastPlayed = lastStarted ? lastPlayed

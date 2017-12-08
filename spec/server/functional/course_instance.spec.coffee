@@ -483,13 +483,13 @@ describe 'GET /db/course_instance/:handle/levels/:levelOriginal/next', ->
     it 'returns the next level for the course in the linked classroom', utils.wrap (done) ->
       [res, body] = yield request.getAsync { uri: utils.getURL("/db/course_instance/#{@courseInstanceA.id}/levels/#{@levelA.id}/sessions/#{@sessionA.id}/next"), json: true }
       expect(res.statusCode).toBe(200)
-      expect(res.body.original).toBe(@levelB.original.toString())
+      expect(res.body.level.original).toBe(@levelB.original.toString())
       done()
 
     it 'returns empty object if the given level is the last level in its course', utils.wrap (done) ->
       [res, body] = yield request.getAsync { uri: utils.getURL("/db/course_instance/#{@courseInstanceA.id}/levels/#{@levelB.id}/sessions/#{@sessionB.id}/next"), json: true }
       expect(res.statusCode).toBe(200)
-      expect(res.body).toEqual({})
+      expect(res.body.level).toEqual({})
       done()
 
     it 'returns 404 if the given level is not in the course instance\'s course', utils.wrap (done) ->
@@ -531,13 +531,13 @@ describe 'GET /db/course_instance/:handle/levels/:levelOriginal/next', ->
     it 'returns the next level for the course in the linked classroom', utils.wrap (done) ->
       [res, body] = yield request.getAsync { uri: utils.getURL("/db/course_instance/#{@courseInstanceA.id}/levels/#{@levelB.id}/sessions/#{@sessionB.id}/next"), json: true }
       expect(res.statusCode).toBe(200)
-      expect(res.body.original).toBe(@levelJSPrimer1.original.toString())
+      expect(res.body.level.original).toBe(@levelJSPrimer1.original.toString())
       done()
 
     it 'returns empty object if the given level is the last level in its course', utils.wrap (done) ->
       [res, body] = yield request.getAsync { uri: utils.getURL("/db/course_instance/#{@courseInstanceA.id}/levels/#{@levelJSPrimer1.id}/sessions/#{@sessionJSPrimer1.id}/next"), json: true }
       expect(res.statusCode).toBe(200)
-      expect(res.body).toEqual({})
+      expect(res.body.level).toEqual({})
       done()
 
 describe 'courseInstances.fetchNextLevel', ->
@@ -615,7 +615,7 @@ describe 'courseInstances.fetchNextLevel', ->
     it 'practice level not returned', utils.wrap (done) ->
       [res, body] = yield request.getAsync { uri: utils.getURL("/db/course_instance/#{@courseInstanceA._id}/levels/#{@levelC._id}/sessions/#{@sessionC._id}/next"), json: true }
       expect(res.statusCode).toBe(200)
-      expect(res.body).toEqual({})
+      expect(res.body.level).toEqual({})
       done()
 
 describe 'GET /db/course_instance/:handle/classroom', ->

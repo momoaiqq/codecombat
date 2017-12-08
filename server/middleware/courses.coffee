@@ -36,6 +36,7 @@ module.exports =
     res.status(200).send(levels)
 
   fetchNextLevel: wrap (req, res) ->
+    # TODO: Update to account for Assessments
     levelOriginal = req.params.levelOriginal
     if not database.isID(levelOriginal)
       throw new errors.UnprocessableEntity('Invalid level original ObjectId')

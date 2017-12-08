@@ -451,6 +451,8 @@
     course: "Course:"
     done: "Done"
     next_level: "Next Level"
+    challenge_unlocked: "Challenge Unlocked"
+    start_challenge: "Start Challenge"
     next_game: "Next game"
     languages: "Languages"
     programming_language: "Programming language"
